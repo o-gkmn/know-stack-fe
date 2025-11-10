@@ -1,4 +1,41 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ApiUserService } from '../lib/api';
+import '../lib/api/config'; // API konfigürasyonunu yükle
+
 export default function Register() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    username: '',
+  });
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
+
+    try {
+      const response = await ApiUserService.postUsersRegister(formData);
+      
+      // Token'ı localStorage'a kaydet
+      if (response.token) {
+        localStorage.setItem('authToken', response.token);
+      }
+
+      // Başarılı kayıt, login sayfasına veya home'a yönlendir
+      navigate('/');
+    } catch (err: any) {
+      setError(err.body?.message || 'Kayıt olurken bir hata oluştu');
+      console.error('Register error:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-linear-to-br from-secondary-500 via-secondary-600 to-accent-600 p-4">
       <div className="w-full max-w-md">
@@ -15,7 +52,31 @@ export default function Register() {
 
         <div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/20">
           <h2 className="text-center text-2xl font-bold text-accent-700 mb-6">Kayıt Ol</h2>
-          <form className="space-y-5">
+          
+          {error && (
+            <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="space-y-2">
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium text-accent-600"
+              >
+                Kullanıcı Adı
+              </label>
+              <input
+                type="text"
+                id="username"
+                placeholder="kullaniciadi"
+                value={formData.username}
+                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                required
+                className="w-full px-4 py-3 rounded-lg border-2 border-accent-200 bg-white text-accent-800 placeholder:text-accent-300 focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-400/20 transition-all duration-200"
+              />
+            </div>
             <div className="space-y-2">
               <label
                 htmlFor="email"
