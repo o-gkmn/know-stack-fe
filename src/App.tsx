@@ -1,11 +1,25 @@
+import { Routes, Route, Outlet } from 'react-router-dom';
+import { Home, About, Login, Register } from './pages';
+import { MainLayout } from './layouts';
+
+function LayoutWrapper() {
+  return (
+    <MainLayout>
+      <Outlet />
+    </MainLayout>
+  );
+}
+
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1>App</h1>
-      <button
-        className="bg-primary-400 p-2 rounded-md text-white"
-      >Click me</button>
-    </div>
+    <Routes>
+      <Route element={<LayoutWrapper />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Route>
+      <Route path="/login" element={<Login />} />
+      <Route path='/register' element={<Register />} />
+    </Routes>
   );
 }
 
