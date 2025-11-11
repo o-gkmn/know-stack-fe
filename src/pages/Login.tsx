@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { OpenAPI } from "../lib/api";
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -10,6 +11,11 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await login({ email, password, remember });
+  };
+
+  const handleLoginWithGoogle = async () => {
+    const googleAuthUrl = `${OpenAPI.BASE}/oauth/google/login`;
+    window.location.href = googleAuthUrl;
   };
 
   return (
@@ -111,6 +117,7 @@ export default function Login() {
               <button
                 type="button"
                 className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-lg border-2 border-accent-200 bg-white text-accent-700 font-medium hover:bg-accent-50 hover:border-accent-300 transition-all duration-200"
+                onClick={handleLoginWithGoogle}
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />

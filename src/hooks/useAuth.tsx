@@ -60,7 +60,7 @@ export function useAuth() {
       if (response.accessToken) {
         // Access token'ı kaydet
         localStorage.setItem(AUTH_TOKEN_KEY, response.accessToken);
-        
+
         // Refresh token'ı da kaydet (varsa)
         if (response.refreshToken) {
           localStorage.setItem(REFRESH_TOKEN_KEY, response.refreshToken);
@@ -96,10 +96,10 @@ export function useAuth() {
       showErrorToast(err, 'Giriş yapılırken bir hata oluştu.');
 
       // Error mesajını al (toast zaten gösterildi, bu sadece state için)
-      const errorMessage = err instanceof Error && 'status' in err 
+      const errorMessage = err instanceof Error && 'status' in err
         ? (err as { message?: string }).message || 'Giriş yapılırken bir hata oluştu.'
         : 'Giriş yapılırken bir hata oluştu.';
-      
+
       setAuthState(prev => ({
         ...prev,
         loading: false,
@@ -115,7 +115,7 @@ export function useAuth() {
     // Her iki token'ı da temizle
     localStorage.removeItem(AUTH_TOKEN_KEY);
     localStorage.removeItem(REFRESH_TOKEN_KEY);
-    
+
     setAuthState({
       token: null,
       isAuthenticated: false,

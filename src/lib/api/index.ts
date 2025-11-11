@@ -9,6 +9,7 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { dto_CreateUserRequest } from './models/dto_CreateUserRequest';
 export type { dto_CreateUserResponse } from './models/dto_CreateUserResponse';
+export type { dto_GoogleAuthResponse } from './models/dto_GoogleAuthResponse';
 export type { dto_LoginRequest } from './models/dto_LoginRequest';
 export type { dto_LoginResponse } from './models/dto_LoginResponse';
 export type { dto_LogoutRequest } from './models/dto_LogoutRequest';
@@ -20,3 +21,4 @@ export type { dto_SetClaimsResponse } from './models/dto_SetClaimsResponse';
 
 export { ApiHealthService } from './services/ApiHealthService';
 export { ApiUserService } from './services/ApiUserService';
+export { OAuthService } from './services/OAuthService';
