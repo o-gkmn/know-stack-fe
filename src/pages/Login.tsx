@@ -4,12 +4,12 @@ import { useAuth } from "../hooks/useAuth";
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
+  const [remember, setRemember] = useState(false);
   const { login, loading } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await login({ email, password });
+    await login({ email, password, remember });
   };
 
   return (
@@ -70,8 +70,8 @@ export default function Login() {
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
+                  checked={remember}
+                  onChange={(e) => setRemember(e.target.checked)}
                   className="w-4 h-4 rounded border-accent-300 text-primary-400 focus:ring-primary-400 focus:ring-2"
                 />
                 <span className="text-accent-600">Beni hatırla</span>

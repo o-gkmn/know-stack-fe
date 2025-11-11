@@ -2,9 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type dto_LoginRequest = {
-    email: string;
-    password: string;
-    remember: boolean;
+export type dto_RefreshResponse = {
+    refreshToken?: string;
 };
 

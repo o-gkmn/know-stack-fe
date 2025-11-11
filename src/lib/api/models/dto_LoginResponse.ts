@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type dto_LoginResponse = {
-    token?: string;
+    accessToken?: string;
+    refreshToken?: string;
 };
 

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ApiUserService } from '../lib/api';
 import type { dto_LoginRequest } from '../lib/api';
 import { showErrorToast, showSuccessToast } from '../utils/toast';
+import { AUTH_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../lib/api/config';
 
 interface AuthState {
   token: string | null;
@@ -16,8 +17,6 @@ interface LoginResult {
   success: boolean;
   error?: string;
 }
-
-const AUTH_TOKEN_KEY = 'authToken';
 
 export function useAuth() {
   const navigate = useNavigate();
@@ -58,10 +57,17 @@ export function useAuth() {
     try {
       const response = await ApiUserService.postUsersLogin(credentials);
 
-      if (response.token) {
-        localStorage.setItem(AUTH_TOKEN_KEY, response.token);
+      if (response.accessToken) {
+        // Access token'ı kaydet
+        localStorage.setItem(AUTH_TOKEN_KEY, response.accessToken);
+        
+        // Refresh token'ı da kaydet (varsa)
+        if (response.refreshToken) {
+          localStorage.setItem(REFRESH_TOKEN_KEY, response.refreshToken);
+        }
+
         setAuthState({
-          token: response.token,
+          token: response.accessToken,
           isAuthenticated: true,
           loading: false,
           error: null,
@@ -106,7 +112,10 @@ export function useAuth() {
 
   // Logout fonksiyonu
   const logout = useCallback((redirectTo?: string) => {
+    // Her iki token'ı da temizle
     localStorage.removeItem(AUTH_TOKEN_KEY);
+    localStorage.removeItem(REFRESH_TOKEN_KEY);
+    
     setAuthState({
       token: null,
       isAuthenticated: false,

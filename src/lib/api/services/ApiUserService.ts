@@ -6,6 +6,10 @@ import type { dto_CreateUserRequest } from '../models/dto_CreateUserRequest';
 import type { dto_CreateUserResponse } from '../models/dto_CreateUserResponse';
 import type { dto_LoginRequest } from '../models/dto_LoginRequest';
 import type { dto_LoginResponse } from '../models/dto_LoginResponse';
+import type { dto_LogoutRequest } from '../models/dto_LogoutRequest';
+import type { dto_LogoutResponse } from '../models/dto_LogoutResponse';
+import type { dto_RefreshRequest } from '../models/dto_RefreshRequest';
+import type { dto_RefreshResponse } from '../models/dto_RefreshResponse';
 import type { dto_SetClaimsRequest } from '../models/dto_SetClaimsRequest';
 import type { dto_SetClaimsResponse } from '../models/dto_SetClaimsResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -26,11 +30,6 @@ export class ApiUserService {
             method: 'POST',
             url: '/users/claims',
             body: user,
-            errors: {
-                400: `Bad Request`,
-                409: `Conflict`,
-                500: `Internal Server Error`,
-            },
         });
     }
     /**
@@ -47,11 +46,38 @@ export class ApiUserService {
             method: 'POST',
             url: '/users/login',
             body: user,
-            errors: {
-                400: `Bad Request`,
-                409: `Conflict`,
-                500: `Internal Server Error`,
-            },
+        });
+    }
+    /**
+     * Logout a user
+     * Logs out a user
+     * @param user User to logout
+     * @returns dto_LogoutResponse OK
+     * @throws ApiError
+     */
+    public static postUsersLogout(
+        user: dto_LogoutRequest,
+    ): CancelablePromise<dto_LogoutResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/users/logout',
+            body: user,
+        });
+    }
+    /**
+     * Refresh a token
+     * Refreshes a token
+     * @param user User to refresh
+     * @returns dto_RefreshResponse OK
+     * @throws ApiError
+     */
+    public static postUsersRefresh(
+        user: dto_RefreshRequest,
+    ): CancelablePromise<dto_RefreshResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/users/refresh',
+            body: user,
         });
     }
     /**
@@ -68,11 +94,6 @@ export class ApiUserService {
             method: 'POST',
             url: '/users/register',
             body: user,
-            errors: {
-                400: `Bad Request`,
-                409: `Conflict`,
-                500: `Internal Server Error`,
-            },
         });
     }
 }

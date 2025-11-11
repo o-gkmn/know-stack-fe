@@ -2,9 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type httperrors_ValidationErrors = {
-    error?: string;
-    in?: string;
-    key?: string;
+export type dto_LogoutRequest = {
+    refreshToken: string;
 };
 
