@@ -29,8 +29,8 @@ export function handleApiError(
       }
       
       // Title varsa kullan
-      if ('httpError' in errorBody && errorBody.httpError?.title) {
-        return errorBody.httpError.title;
+      if ('title' in errorBody && errorBody.title) {
+        return errorBody.title;
       }
     }
 
