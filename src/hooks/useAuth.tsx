@@ -2,9 +2,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ApiUserService } from '../lib/api';
-import type { dto_LoginRequest } from '../lib/api';
+import type { dto_CreateUserRequest, dto_LoginRequest } from '../lib/api';
 import { showErrorToast, showSuccessToast } from '../utils/toast';
 import { AUTH_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../lib/api/config';
+import { handleApiError } from '../utils/errorHandler';
 
 interface AuthState {
   token: string | null;
@@ -129,6 +130,42 @@ export function useAuth() {
     navigate(redirectPath, { replace: true });
   }, [navigate]);
 
+  // Register fonksiyonu
+  const register = useCallback(async (
+    userData: dto_CreateUserRequest,
+    options?: { redirectTo?: string }
+  ): Promise<LoginResult> => {
+    setAuthState(prev => ({ ...prev, loading: true, error: null }));
+
+    try {
+      await ApiUserService.postUsersRegister(userData);
+
+      // Register başarılı
+      setAuthState(prev => ({ ...prev, loading: false }));
+      showSuccessToast('Kayıt başarılı! Lütfen giriş yapın.');
+
+      // Login sayfasına yönlendir
+      const redirectPath = options?.redirectTo || '/login';
+      navigate(redirectPath, { replace: true });
+
+      return { success: true };
+    } catch (err: unknown) {
+      // API hatasını işle ve kullanıcı dostu mesaj al
+      const errorMessage = handleApiError(err, 'Kayıt olurken bir hata oluştu.');
+      
+      // Hata toast'ı göster
+      showErrorToast(err, errorMessage);
+
+      setAuthState(prev => ({
+        ...prev,
+        loading: false,
+        error: errorMessage,
+      }));
+
+      return { success: false, error: errorMessage };
+    }
+  }, [navigate]);
+
   // Token'ı kontrol et (örneğin API çağrısı öncesi)
   const checkAuth = useCallback(() => {
     const token = localStorage.getItem(AUTH_TOKEN_KEY);
@@ -160,5 +197,6 @@ export function useAuth() {
     logout,
     checkAuth,
     clearError,
+    register,
   };
 }

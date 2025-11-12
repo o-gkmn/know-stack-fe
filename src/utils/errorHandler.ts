@@ -1,7 +1,8 @@
 import type { 
   ApiError,
   httperrors_HTTPError,
-  httperrors_HTTPValidationError 
+  httperrors_HTTPValidationError,
+
 } from '../lib/api';
 
 /**
@@ -28,8 +29,8 @@ export function handleApiError(
       }
       
       // Title varsa kullan
-      if (errorBody.title) {
-        return errorBody.title;
+      if ('httpError' in errorBody && errorBody.httpError?.title) {
+        return errorBody.httpError.title;
       }
     }
 

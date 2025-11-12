@@ -2,6 +2,7 @@ import { Routes, Route, Outlet } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { Home, About, Login, Register } from './pages';
 import { MainLayout } from './layouts';
+import OAuthCallback from './pages/OAuthCallback';
 
 function LayoutWrapper() {
   return (
@@ -21,6 +22,7 @@ function App() {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/oauth/google/callback' element={<OAuthCallback />} />
       </Routes>
       <Toaster
         position="top-right"

@@ -16,6 +16,10 @@ export class ApiHealthService {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/health',
+            errors: {
+                400: `Bad Request`,
+                500: `Internal Server Error`,
+            },
         });
     }
 }

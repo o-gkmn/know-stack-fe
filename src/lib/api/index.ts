@@ -18,6 +18,9 @@ export type { dto_RefreshRequest } from './models/dto_RefreshRequest';
 export type { dto_RefreshResponse } from './models/dto_RefreshResponse';
 export type { dto_SetClaimsRequest } from './models/dto_SetClaimsRequest';
 export type { dto_SetClaimsResponse } from './models/dto_SetClaimsResponse';
+export type { httperrors_HTTPError } from './models/httperrors_HTTPError';
+export type { httperrors_HTTPValidationError } from './models/httperrors_HTTPValidationError';
+export type { httperrors_ValidationErrors } from './models/httperrors_ValidationErrors';
 
 export { ApiHealthService } from './services/ApiHealthService';
 export { ApiUserService } from './services/ApiUserService';
