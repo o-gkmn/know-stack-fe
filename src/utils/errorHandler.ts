@@ -51,8 +51,7 @@ export function handleApiError(
       return apiError.message;
     }
   } else if (err instanceof Error) {
-    // Genel Error
-    return err.message;
+    return defaultMessage;
   }
 
   return defaultMessage;

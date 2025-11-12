@@ -1,10 +1,17 @@
 import { Routes, Route, Outlet } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { Home, About, Login, Register } from './pages';
+import { 
+  Home, 
+  About, 
+  Login, 
+  Register, 
+  OAuthCallback, 
+  ForgetPassword, 
+  ResetPassword,
+  TermsOfService,
+  PrivacyPolicy 
+} from './pages';
 import { MainLayout } from './layouts';
-import OAuthCallback from './pages/OAuthCallback';
-import ResetPassword from './pages/ResetPassword';
-import ForgetPassword from './pages/ForgetPassword';
 
 function LayoutWrapper() {
   return (
@@ -27,6 +34,8 @@ function App() {
         <Route path='/oauth/google/callback' element={<OAuthCallback />} />
         <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='/forget-password' element={<ForgetPassword />} />
+        <Route path='/terms-of-service' element={<TermsOfService />} />
+        <Route path='/privacy-policy' element={<PrivacyPolicy />} />
       </Routes>
       <Toaster
         position="top-right"

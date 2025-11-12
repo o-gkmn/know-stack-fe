@@ -108,12 +108,12 @@ export default function Register() {
 
         {/* Footer */}
         <p className="text-center text-secondary-100 text-xs mt-6">
-          Giriş Yaparak {' '}
-          <a href="#" className="underline hover:text-white transition-colors">
+          Kayıt Olarak {' '}
+          <a href="/terms-of-service" className="underline hover:text-white transition-colors">
             Kullanım Koşulları
           </a>
           {' '}ve{' '}
-          <a href="#" className="underline hover:text-white transition-colors">
+          <a href="/privacy-policy" className="underline hover:text-white transition-colors">
             Gizlilik Politikası
           </a>
           'nı kabul etmiş olursunuz
