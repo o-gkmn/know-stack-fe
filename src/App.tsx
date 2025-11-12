@@ -3,6 +3,8 @@ import { Toaster } from 'react-hot-toast';
 import { Home, About, Login, Register } from './pages';
 import { MainLayout } from './layouts';
 import OAuthCallback from './pages/OAuthCallback';
+import ResetPassword from './pages/ResetPassword';
+import ForgetPassword from './pages/ForgetPassword';
 
 function LayoutWrapper() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/oauth/google/callback' element={<OAuthCallback />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
+        <Route path='/forget-password' element={<ForgetPassword />} />
       </Routes>
       <Toaster
         position="top-right"

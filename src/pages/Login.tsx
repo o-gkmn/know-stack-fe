@@ -82,7 +82,7 @@ export default function Login() {
                 />
                 <span className="text-accent-600">Beni hatırla</span>
               </label>
-              <a href="#" className="text-secondary-500 hover:text-secondary-600 font-medium transition-colors">
+              <a href="/forget-password" className="text-secondary-500 hover:text-secondary-600 font-medium transition-colors">
                 Şifremi unuttun?
               </a>
             </div>
