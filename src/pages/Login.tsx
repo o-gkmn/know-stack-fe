@@ -20,10 +20,10 @@ export default function Login() {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-linear-to-br from-secondary-500 via-secondary-600 to-accent-600 p-4">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md sm:max-w-lg">
         {/* Logo */}
         <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold text-white mb-2">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-2">
             <span className="bg-linear-to-r from-primary-200 to-primary-400 bg-clip-text text-transparent">
               Know
             </span>
@@ -33,7 +33,7 @@ export default function Login() {
         </div>
 
         {/* Card */}
-        <div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/20">
+        <div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl p-5 sm:p-8 border border-white/20">
           <h2 className="text-2xl font-bold text-accent-700 mb-6 text-center">Giriş Yap</h2>
 
           <form onSubmit={handleSubmit} className="space-y-5">
